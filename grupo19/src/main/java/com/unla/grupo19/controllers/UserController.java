@@ -2,6 +2,7 @@ package com.unla.grupo19.controllers;
 
 import java.util.Arrays;
 
+import com.unla.grupo19.helpers.ViewHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class UserController {
 	@GetMapping("/registro")
 	public String registrar(Model model) {
 		model.addAttribute("usuario", new User());  //model: interactua con la vista(html)registro.html
-		return "registro.html";
+		return ViewHelper.REGISTER_PAGE;
 	}
 	
 	@PostMapping("/save")
@@ -39,7 +40,7 @@ public class UserController {
 		System.out.println(user); 
 		user.setRoles(Arrays.asList(roleService.traerPorNombre(Roles.ROLE_AUDITOR).get())); //se le setea el rol de audirot por defecto
 		userService.saveOrUpdate(user);
-		return new RedirectView("/login");
+		return new RedirectView("/"+ViewHelper.LOGIN_PAGE);
 	}
 	
 	
@@ -48,17 +49,17 @@ public class UserController {
 	@RequestParam(name="logout", required=false)String logout) {
 		model.addAttribute("error",error);
 		model.addAttribute("logout",logout);
-		return "login";
+		return ViewHelper.LOGIN_PAGE;
 	}
 	
 	@GetMapping("/logout")
 	public String logout(Model model) {
-		return "redirect:/login";
+		return "redirect:/"+ViewHelper.LOGIN_PAGE;
 	}
 
 	@GetMapping("/loginsuccess")
 	public String loginCheck() {
-		return "redirect:/home";
+		return "redirect:/"+ViewHelper.HOME_PAGE;
 	}
 	
 
