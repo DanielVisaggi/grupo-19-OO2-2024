@@ -1,7 +1,6 @@
 package com.unla.grupo19.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +12,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 public class Lote extends Stock {
+
     @Column(name = "cantidad_recibida", nullable = false)
     private int cantidadRecibida;
 
