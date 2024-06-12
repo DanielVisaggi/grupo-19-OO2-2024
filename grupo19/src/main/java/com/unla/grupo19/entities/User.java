@@ -65,10 +65,6 @@ public class User {
 		this.updatedAt = updatedAt;
 		this.roles = roles;
 	}
-	
-	
-	
-	
-	
+
 }
 
