@@ -19,9 +19,9 @@ public class Stock {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int idStock;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
-    @JoinTable(name = "stock_producto",joinColumns = @JoinColumn(name="id_stock"), inverseJoinColumns = @JoinColumn(name="id_producto") )
-    protected List<Producto> productos;
+    @ManyToOne
+    @JoinColumn(name = "id_producto")
+    protected Producto producto;
 
     @Column(name = "cantidad_stock", nullable = false)
     protected int cantidadStock;
