@@ -41,11 +41,15 @@ public class Compra {
 	@Column(name = "fecha_compra", nullable = false)
 	private LocalDate fechaCompra;
 	
-	public Compra(Producto producto, User cliente, int cantidad, LocalDate fechaCompra) {
+	@Column(name = "precio_final_venta", nullable = false)
+	private int precioFinalVenta;
+	
+	public Compra(Producto producto, User cliente, int cantidad, LocalDate fechaCompra, int precioFinalVenta) {
 		super();
 		this.producto = producto;
 		this.cliente = cliente;
 		this.cantidad = cantidad;
 		this.fechaCompra = fechaCompra;
+		this.precioFinalVenta = precioFinalVenta;
 	}
 }
