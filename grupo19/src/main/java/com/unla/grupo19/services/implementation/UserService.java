@@ -11,16 +11,19 @@ import com.unla.grupo19.services.IUserService;
 @Service
 public class UserService implements IUserService {
 
-@Autowired	
-private  IUserRepository userRepository;
+	@Autowired
+	private IUserRepository userRepository;
 
-@Autowired
-private BCryptPasswordEncoder passwordEncoder;
-@Override
-public User saveOrUpdate(User user) {
-	user.setPassword(passwordEncoder.encode(user.getPassword()));
-	return userRepository.save(user);
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+	@Override
+	public User saveOrUpdate(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		return userRepository.save(user);
 	}
-	
-}
 
+	public User findByUsernameQuery(String username) {
+		return userRepository.findByUsernameQuery(username);
+	}
+}
