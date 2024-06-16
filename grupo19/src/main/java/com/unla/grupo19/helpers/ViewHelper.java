@@ -4,4 +4,5 @@ public abstract class ViewHelper {
     public static final String HOME_PAGE = "home.html";
     public static final String REGISTER_PAGE = "registro.html";
     public static final String LOGIN_PAGE = "login.html";
+    public static final String COMPRA_PAGE = "comprarProducto.html";
 }
