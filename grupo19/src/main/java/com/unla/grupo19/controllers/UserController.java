@@ -61,6 +61,5 @@ public class UserController {
 	public String loginCheck() {
 		return "redirect:/"+ViewHelper.HOME_PAGE;
 	}
-	
 
 }

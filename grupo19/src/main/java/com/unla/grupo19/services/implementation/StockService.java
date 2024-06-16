@@ -1,5 +1,6 @@
 package com.unla.grupo19.services.implementation;
 
+import com.unla.grupo19.entities.Producto;
 import com.unla.grupo19.entities.Stock;
 import com.unla.grupo19.repositories.IStockRepository;
 import com.unla.grupo19.services.IStockService;
@@ -23,8 +24,8 @@ public class StockService implements IStockService {
     }
 
     @Override
-    public Stock findByIdProducto(int idProducto) {
-        return stockRepository.findByIdProducto(idProducto);
+    public Stock findByProducto(Producto producto) {
+        return stockRepository.findByProducto(producto);
     }
 
     @Override
