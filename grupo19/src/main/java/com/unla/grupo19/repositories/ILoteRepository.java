@@ -8,5 +8,5 @@ import java.io.Serializable;
 
 @Repository
 public interface ILoteRepository extends JpaRepository<Lote, Serializable> {
-    public Lote findByIdStock(int idStock);
+    public Lote findByIdLote(int idLote);
 }

@@ -7,6 +7,8 @@ import com.unla.grupo19.services.IStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StockService implements IStockService {
 
@@ -26,6 +28,11 @@ public class StockService implements IStockService {
     @Override
     public Stock findByProducto(Producto producto) {
         return stockRepository.findByProducto(producto);
+    }
+
+    @Override
+    public List<Stock> findAll() {
+        return stockRepository.findAll();
     }
 
     @Override

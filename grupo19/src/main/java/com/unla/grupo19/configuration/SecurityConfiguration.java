@@ -54,11 +54,9 @@ public class SecurityConfiguration {
 				.formLogin((form) -> form.loginPage("/login").loginProcessingUrl("/loginprocess")
 						.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/loginsuccess")
 						.permitAll()
-
 				).logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/logout").permitAll());
 
 		return http.build();
-
 	}
 	
 

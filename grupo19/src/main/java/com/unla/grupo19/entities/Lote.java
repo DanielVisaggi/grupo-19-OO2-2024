@@ -34,10 +34,10 @@ public class Lote {
     private Stock stock;
 
     public Lote(int cantidadRecibida, LocalDate fechaRecepcion, String proveedor, int precioDeCompra){
+        super();
         this.cantidadRecibida = cantidadRecibida;
         this.fechaRecepcion = fechaRecepcion;
         this.proveedor = proveedor;
         this.precioDeCompra = precioDeCompra;
     }
-
 }

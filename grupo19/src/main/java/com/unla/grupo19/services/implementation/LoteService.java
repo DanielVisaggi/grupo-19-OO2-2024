@@ -4,9 +4,11 @@ import com.unla.grupo19.entities.Lote;
 import com.unla.grupo19.repositories.ILoteRepository;
 import com.unla.grupo19.services.ILoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class LoteService implements ILoteService {
     @Autowired
     private ILoteRepository loteRepository;
@@ -18,7 +20,7 @@ public class LoteService implements ILoteService {
 
     @Override
     public Lote findById(int idLote) {
-        return loteRepository.findByIdStock(idLote);
+        return loteRepository.findByIdLote(idLote);
     }
 
     @Override
