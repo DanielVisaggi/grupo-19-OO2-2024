@@ -14,5 +14,5 @@ public interface IUserService  {
 	
 	public User saveOrUpdate(User user);
 	
-	
+	public User findByUsernameQuery(String username);
 }

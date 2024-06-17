@@ -45,6 +45,9 @@
 	<body>
     <div class="container">
         <h2 class="my-4">Productos</h2>
+		
+		<div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
+		
         <div class="card-container">
             <div class="card" th:each="producto : ${productos}">
             
@@ -54,11 +57,15 @@
                     <p class="price" th:text="'$' + ${producto.precioDeVenta}">Precio</p>
 					
 					
-					<input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
 					
-					<button type="submit" class="btn btn-primary">Comprar</button>
-					
-					
+					<form th:action="@{/comprar}" method="post">
+						<input type="hidden" name="idProducto" th:value="${producto.idProducto}" />
+						<div class="form-group">
+							<label for="cantidad">Cantidad</label>
+							<input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
+						</div>
+						<button type="submit" class="btn btn-primary">Comprar</button>
+					</form>
 					
                 </div>
             </div>
