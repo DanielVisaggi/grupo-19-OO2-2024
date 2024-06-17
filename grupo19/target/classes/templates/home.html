@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 	<style>
@@ -43,10 +43,12 @@
 				<a class="nav-link text-white" href="/comprarProducto"><i class="fas fa-cog mx-1"></i> Comprar Producto</a>
 			</li>
 
-			<li class="nav-item me-3 me-lg-0">
-				<a class="nav-link text-white" href="/adm/panel"><i class="fas fa-cog mx-1"></i>Panel de Administrador</a>
-			</li>
-			
+			<div th:if="${user.enabled == true}">
+				<li class="nav-item me-3 me-lg-0">
+					<a class="nav-link text-white" href="/adm/panel"><i class="fas fa-cog mx-1"></i>Panel de Administrador</a>
+				</li>
+			</div>
+
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					Dropdown
