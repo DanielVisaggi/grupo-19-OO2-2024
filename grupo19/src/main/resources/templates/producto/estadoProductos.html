@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <title>Estado de los productos</title>
+</head>
+<body>
+    <ul>
+        <li><a href="/adm/panel">Volver al panel principal</a></li>
+    </ul>
+    <h1>Informe sobre cada uno de los productos de la organización</h1>
+    <p>
+        En esta página podrá visualizar el estado de cada uno de los productos registrados.<br>
+    </p>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Código</th>
+            <th>Stock restante</th>
+            <th>Estado</th>
+        </tr>
+        <tr th:each="stock : ${stocks}">
+            <td th:text="${stock.producto.nombre}"></td>
+            <td th:text="${stock.producto.codigo}"></td>
+            <td th:text="${stock.cantidadStock}"></td>
+            <td>
+                <div th:if="${stock.cantidadStock <= stock.minimoStock}">
+                    <p>Preocupante. Este producto está por debajo de los niveles de stock definidos</p>
+                    <a href="/adm/lote/alta">Empezar a reabastecer este producto</a>
+                </div>
+                <div th:if="${stock.cantidadStock > stock.minimoStock}">
+                    <p>Adecuado. Nada de que preocuparse, pero vigilar el nivel de stock</p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
