@@ -3,75 +3,110 @@
 
 <head>
 	<style>
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: deepskyblue;
-  color: white;
-  text-align: center;
-}
-</style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-color: #f3f2f7; /* Fondo claro */
+			color: #333; /* Texto oscuro para contraste */
+			margin: 0;
+			padding: 0;
+		}
 
+		.navbar {
+			background-color: #6a1b9a; /* Morado oscuro */
+			padding: 0.5rem 3rem; /* Espaciado interno */
+		}
+
+		.navbar a {
+			color: #fff; /* Texto blanco para contraste */
+			text-decoration: none; /* Sin subrayado en los enlaces */
+			padding: 0.5rem 1rem; /* Espaciado interno */
+		}
+
+		.navbar a:hover {
+			color: #d1c4e9; /* Morado claro al pasar el mouse */
+		}
+
+		.navbar div a, .navbar div form {
+			display: inline-block; /* Muestra los elementos uno al lado del otro */
+			margin-right: 10px; /* Espaciado entre elementos */
+		}
+
+		.navbar div form input[type="submit"] {
+			background: none; /* Sin fondo */
+			border: none; /* Sin borde */
+			color: #fff; /* Texto blanco para contraste */
+			padding: 0.5rem 1rem; /* Espaciado interno */
+			margin-right: 10px; /* Espaciado entre elementos */
+			cursor: pointer; /* Cursor como puntero para indicar clickeable */
+			font-family: inherit; /* Hereda la fuente del padre */
+			font-size: inherit; /* Hereda el tamaño de fuente del padre */
+		}
+
+		.navbar div form input[type="submit"]:hover {
+			color: #d1c4e9; /* Morado claro al pasar el mouse */
+		}
+
+		p {
+			padding: 20px;
+			line-height: 1.6;
+		}
+
+		.footer {
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			background-color: #4a148c; /* Morado más oscuro para el footer */
+			color: white;
+			text-align: center;
+			padding: 10px 0;
+		}
+	</style>
 	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-info navbar-dark">
+<div class="navbar">
 	<!-- Container wrapper -->
-	<div class="container-fluid">
+	<div>
 		<!-- Navbar brand -->
-		<a class="navbar-brand" href="#">Brand</a>
+		<a href="/home">PC Essentials</a>
 
 		<!-- Icons -->
-		<ul class="navbar-nav d-flex flex-row me-1">
-			<li class="nav-item me-3 me-lg-0">
-				<a class="nav-link text-white" href="#"><i class="fas fa-envelope mx-1"></i> Contact</a>
-			</li>
-			<li class="nav-item me-3 me-lg-0">
-				<a class="nav-link text-white" href="#"><i class="fas fa-cog mx-1"></i> Settings</a>
-			</li>
-			
-			<li class="nav-item me-3 me-lg-0">
-				<a class="nav-link text-white" href="/comprarProducto"><i class="fas fa-cog mx-1"></i> Comprar Producto</a>
-			</li>
+		<div>
+			<a href="#">Contact</a>
+			<a href="/comprarProducto">Comprar Productos</a>
 
-			<div th:if="${isAdmin}">
-				<li class="nav-item me-3 me-lg-0">
-					<a class="nav-link text-white" href="/adm/panel"><i class="fas fa-cog mx-1"></i>Panel de Administrador</a>
-				</li>
-			</div>
-
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-					Dropdown
-				</a>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">Perfil</a></li>
-					<li><form th:action="@{/logout}" method="post" >
-						<input type="submit" value="logout" class="dropdown-item" >
-					</form></li>
-				</ul>
-			</li>
-		</ul>
+			<!-- Admin Panel Link -->
+			<!-- Asegúrate de reemplazar esto con tu lógica de visualización para administradores -->
+			<span th:if="${isAdmin}">
+				<a href="/adm/panel">Panel de Administrador</a>
+			</span>
+			<!-- Dropdown Menu -->
+				<a href="#">Perfil</a>
+				<form action="/logout" method="post">
+					<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+					<input type="submit" value="Logout" />
+				</form>
+		</div>
 	</div>
 
 	<!-- Container wrapper -->
-</nav>
+</div>
 
-<footer class="footer navbar-dark">
-	<p>grupo 19</p>
-	<!-- Copyright -->
-	<!-- Copyright -->
-</footer>
+<p>
+	En PC Essentials, nos comprometemos a ofrecer a nuestros clientes componentes de PC de la más alta calidad. Cada producto en nuestro catálogo ha sido seleccionado con el mayor cuidado y sometido a pruebas rigurosas para asegurar que cumple con los estándares más exigentes de la industria.<br><br>
+	Nuestra plataforma ofrece una experiencia de compra segura y confiable. Nos esforzamos por proteger tu información personal mediante el uso de tecnologías avanzadas y prácticas de seguridad líderes en el sector.<br><br>
+	La satisfacción del cliente es nuestra prioridad en PC Essentials. Con una política de devolución clara y un equipo de servicio al cliente dedicado, estamos aquí para asegurarnos de que tu experiencia con nosotros sea positiva. Ofrecemos envíos rápidos y confiables, precios competitivos y una selección cuidadosa de los componentes más innovadores del mercado. PC Essentials es tu fuente confiable para todas tus necesidades de hardware de PC.<br><br>
+	Para empezar a ver nuestro amplio catálogo, por favor, clickea en la opción "Comprar Productos" en la zona superior derecha de la web.<br><br>
+	Esperamos que tu experiencia sea grata y amena. ¡Gracias por elegirnos!<br><br>
+</p>
 
-<!-- Navbar -->
+<div class="footer">
+	<p>&copy; 2024 PC Essentials. Todos los derechos reservados.</p>
+</div>
+
 </body>
+
 </html>
