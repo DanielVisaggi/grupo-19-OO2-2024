@@ -20,6 +20,11 @@ public class ProductoService implements IProductoService {
         return repository.findById(idProducto).orElse(null);
     }
 
+    @Override
+    public com.unla.grupo19.entities.Producto findByCodigo(String codigo) {
+        return repository.findByCodigo(codigo);
+    }
+
 
     @Override
     public List<Producto> getAll() {
