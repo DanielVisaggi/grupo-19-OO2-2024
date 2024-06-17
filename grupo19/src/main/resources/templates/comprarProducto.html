@@ -47,6 +47,7 @@
         <h2 class="my-4">Productos</h2>
 		
 		<div th:if="${success}" class="alert alert-success" role="alert" th:text="${success}"></div>
+		<div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 		
         <div class="card-container">
             <div class="card" th:each="producto : ${productos}">
