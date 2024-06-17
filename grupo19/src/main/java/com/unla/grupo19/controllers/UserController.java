@@ -2,6 +2,7 @@ package com.unla.grupo19.controllers;
 
 import java.util.Arrays;
 
+import com.unla.grupo19.entities.UserRole;
 import com.unla.grupo19.helpers.ViewHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -64,7 +65,7 @@ public class UserController {
 	public ModelAndView loginCheck() {
 		ModelAndView mav = new ModelAndView(ViewHelper.HOME_PAGE);
 		User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
-		mav.addObject("user", user);
+		mav.addObject("isAdmin", userService.isAdmin(user));
 		return mav;
 	}
 

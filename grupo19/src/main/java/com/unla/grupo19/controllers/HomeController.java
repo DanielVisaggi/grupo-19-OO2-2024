@@ -1,8 +1,10 @@
 package com.unla.grupo19.controllers;
 
 import com.unla.grupo19.entities.User;
+import com.unla.grupo19.entities.UserRole;
 import com.unla.grupo19.helpers.ViewHelper;
 import com.unla.grupo19.services.implementation.UserService;
+import com.unla.grupo19.utils.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ public class HomeController {
 	@GetMapping("")
 	public String home(Model model) {
 		User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
-		model.addAttribute("user", user);
+		model.addAttribute("isAdmin", userService.isAdmin(user));
 		return ViewHelper.HOME_PAGE;
 	}
 

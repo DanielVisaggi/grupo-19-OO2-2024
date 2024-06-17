@@ -43,7 +43,7 @@
 				<a class="nav-link text-white" href="/comprarProducto"><i class="fas fa-cog mx-1"></i> Comprar Producto</a>
 			</li>
 
-			<div th:if="${user.enabled == true}">
+			<div th:if="${isAdmin}">
 				<li class="nav-item me-3 me-lg-0">
 					<a class="nav-link text-white" href="/adm/panel"><i class="fas fa-cog mx-1"></i>Panel de Administrador</a>
 				</li>

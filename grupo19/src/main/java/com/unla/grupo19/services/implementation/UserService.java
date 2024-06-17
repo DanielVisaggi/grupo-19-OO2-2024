@@ -1,5 +1,7 @@
 package com.unla.grupo19.services.implementation;
 
+import com.unla.grupo19.entities.UserRole;
+import com.unla.grupo19.utils.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,5 +27,15 @@ public class UserService implements IUserService {
 
 	public User findByUsernameQuery(String username) {
 		return userRepository.findByUsernameQuery(username);
+	}
+
+	@Override
+	public boolean isAdmin(User user) {
+		boolean isAdmin = false;
+		for(UserRole userRol : user.getRoles()){
+			if(userRol.getRole() == Roles.ROLE_ADMIN)
+				isAdmin = true;
+		}
+		return isAdmin;
 	}
 }
