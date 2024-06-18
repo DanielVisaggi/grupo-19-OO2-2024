@@ -1,5 +1,6 @@
 package com.unla.grupo19.controllers;
 
+import com.unla.grupo19.dto.StockEstadoProductosDTO;
 import com.unla.grupo19.entities.Lote;
 import com.unla.grupo19.entities.Producto;
 import com.unla.grupo19.entities.Stock;
@@ -55,11 +56,10 @@ public class ProductoController {
         // Creo un ModelAndView para la página de estado de productos
         ModelAndView mav = new ModelAndView(ViewHelper.ESTADO_PRODUCTOS_PAGE);
         User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
-
+        List<StockEstadoProductosDTO> stocks = stockService.stocksToStockEstadoProductosDTO(stockService.findAll());
         // Agrego la lista de stocks al ModelAndView
-        mav.addObject("stocks", stockService.findAll());
+        mav.addObject("stocks", stocks);
         mav.addObject("isAdmin", userService.isAdmin(user));
-
         // Retorno el ModelAndView
         return mav;
     }
