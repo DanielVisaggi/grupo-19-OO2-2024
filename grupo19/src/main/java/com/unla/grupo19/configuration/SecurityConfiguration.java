@@ -33,24 +33,28 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	 BCryptPasswordEncoder passwordEncoder() {
+	BCryptPasswordEncoder passwordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		return bCryptPasswordEncoder;
 	}
 
-	
- 	@Bean
- 	 WebSecurityCustomizer webSecurityCustomizer() {
- 		return (web) -> web.ignoring()
- 				.requestMatchers("/static/**", "/js/**", "/css/**", "/img/**", "/json/**");
- 	}
-	
+
 	@Bean
-	 SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	WebSecurityCustomizer webSecurityCustomizer() {
+		return (web) -> web.ignoring()
+				.requestMatchers("/static/**", "/js/**", "/css/**", "/img/**", "/json/**");
+
+
+	}
+
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/","/registro","/save").permitAll()
-				.anyRequest().authenticated())
+						// Permitir acceso a las rutas de edición y recursos estáticos
+						.requestMatchers("/", "/registro", "/save", "/producto/alta", "/producto/alta/sent").permitAll() // Ajustar las rutas permitidas
+						//.requestMatchers("/","/registro","/save").permitAll()
+						.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/login").loginProcessingUrl("/loginprocess")
 						.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/loginsuccess")
 						.permitAll()
@@ -58,9 +62,10 @@ public class SecurityConfiguration {
 
 		return http.build();
 	}
-	
 
-	
-	
+
+
+
 }
+
 

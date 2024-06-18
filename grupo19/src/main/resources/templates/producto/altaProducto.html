@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dar de alta un producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script>
+        function validateCodigo(input) {
+            input.value = input.value.toUpperCase().replace(/[^A-Z]/g, '').substring(0, 4);
+        }
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-info navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/loginsuccess">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/producto/alta"><i class="fas fa-cog mx-1"></i> Crear Producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/producto/list"><i class="fas fa-cog mx-1"></i> Listar Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/comprarProducto"><i class="fas fa-cog mx-1"></i> Comprar Producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#"><i class="fas fa-envelope mx-1"></i> Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#"><i class="fas fa-cog mx-1"></i> Settings</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <!-- Opcional: Ajusta el condicional de acuerdo a tu lógica de usuario -->
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/adm/panel"><i class="fas fa-cog mx-1"></i>Panel de Administrador</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="logout" class="dropdown-item">
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1 class="mb-4">Alta de nuevo producto</h1>
+    <p>
+        En esta página podrá dar de alta un nuevo producto para la organización.<br>
+        Asegúrese de rellenar todos los campos cuidadosamente.<br>
+    </p>
+
+    <!-- Mostrar mensaje de éxito -->
+    <div th:if="${successMessage}" class="alert alert-success" role="alert">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <!-- Mostrar mensaje de error -->
+    <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <p th:text="${errorMessage}"></p>
+    </div>
+
+    <form action="/producto/alta/sent" method="POST">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <div class="mb-3">
+            <label for="codigo" class="form-label">Código (4 letras máximo):</label>
+            <input type="text" class="form-control" id="codigo" name="codigo" required oninput="validateCodigo(this)">
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+        </div>
+        <div class="mb-3">
+            <label for="costo" class="form-label">Costo:</label>
+            <input type="number" class="form-control" id="costo" name="costo" required>
+        </div>
+        <div class="mb-3">
+            <label for="precioDeVenta" class="form-label">Precio de venta:</label>
+            <input type="number" class="form-control" id="precioDeVenta" name="precioDeVenta" required>
+        </div>
+        <p>La siguiente información a dar de alta refiere al stock inicial del producto anteriormente cargado.</p>
+        <div class="mb-3">
+            <label for="cantidadStock" class="form-label">Cantidad inicial de stock:</label>
+            <input type="number" class="form-control" id="cantidadStock" name="cantidadStock" required>
+        </div>
+        <div class="mb-3">
+            <label for="minimoStock" class="form-label">Cantidad mínima de stock:</label>
+            <input type="number" class="form-control" id="minimoStock" name="minimoStock" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Dar de alta nuevo producto</button>
+        <a href="/loginsuccess" class="btn btn-secondary">Regresar al Home</a> <!-- Botón para regresar al home -->
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
