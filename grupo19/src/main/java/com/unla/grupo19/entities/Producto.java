@@ -30,7 +30,8 @@ public class Producto {
 
     @Column(name="precio_de_venta", nullable=false)
     private int precioDeVenta;
-
+    @Column(name="visible", nullable=false)
+    private boolean visible = true;
     public Producto(String codigo, String nombre, String descripcion, int costo, int precioDeVenta){
         super();
         this.codigo = codigo;
