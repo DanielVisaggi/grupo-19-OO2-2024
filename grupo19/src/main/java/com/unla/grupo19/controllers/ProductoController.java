@@ -3,12 +3,15 @@ package com.unla.grupo19.controllers;
 import com.unla.grupo19.entities.Lote;
 import com.unla.grupo19.entities.Producto;
 import com.unla.grupo19.entities.Stock;
+import com.unla.grupo19.entities.User;
 import com.unla.grupo19.helpers.ViewHelper;
 import com.unla.grupo19.helpers.ViewHelperLote;
 import com.unla.grupo19.helpers.ViewHelperProducto;
 import com.unla.grupo19.services.implementation.ProductoService;
 import com.unla.grupo19.services.implementation.StockService;
+import com.unla.grupo19.services.implementation.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +35,9 @@ public class ProductoController {
     @Autowired
     private StockService stockService;
 
+    @Autowired
+    private UserService userService;
+
     // Manejo la petición GET para obtener un producto por su ID
     @GetMapping("/{id}")
     public String getById(@PathVariable(name="id")int id, Model model) {
@@ -48,8 +54,12 @@ public class ProductoController {
     public ModelAndView estadoPage(){
         // Creo un ModelAndView para la página de estado de productos
         ModelAndView mav = new ModelAndView(ViewHelper.ESTADO_PRODUCTOS_PAGE);
+        User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
+
         // Agrego la lista de stocks al ModelAndView
         mav.addObject("stocks", stockService.findAll());
+        mav.addObject("isAdmin", userService.isAdmin(user));
+
         // Retorno el ModelAndView
         return mav;
     }
@@ -59,6 +69,8 @@ public class ProductoController {
     public ModelAndView altaProductoPage(){
         // Creo un ModelAndView para la página de alta de productos
         ModelAndView mAV = new ModelAndView(ViewHelperProducto.PRODUCTO_NEW);
+        User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
+        mAV.addObject("isAdmin", userService.isAdmin(user));
         // Retorno el ModelAndView
         return mAV;
     }
@@ -70,6 +82,7 @@ public class ProductoController {
         ModelAndView mav = new ModelAndView("producto/listProductos");
         // Obtengo todos los stocks
         List<Stock> stocks = stockService.findAll();
+        User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
         // Extraigo los productos de los stocks y filtro los productos visibles
         List<Producto> productos = stocks.stream()
                 .map(Stock::getProducto)
@@ -78,6 +91,7 @@ public class ProductoController {
                 .collect(Collectors.toList());
         // Agrego la lista de productos al ModelAndView
         mav.addObject("productos", productos);
+        mav.addObject("isAdmin", userService.isAdmin(user));
         // Retorno el ModelAndView
         return mav;
     }

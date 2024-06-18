@@ -44,7 +44,9 @@ public class CompraController {
 	@GetMapping("/comprarProducto")
 	public ModelAndView comprarProducto() {
 		ModelAndView mAV = new ModelAndView(ViewHelper.COMPRA_PAGE);
+		User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
 		mAV.addObject("productos", productoService.getAll());
+		mAV.addObject("isAdmin", userService.isAdmin(user));
 		return mAV;
 	}
 
@@ -78,6 +80,7 @@ public class CompraController {
 
 		model.addAttribute("success", "Compra exitosa!");
 		model.addAttribute("productos", productoService.getAll());
+		model.addAttribute("isAdmin", userService.isAdmin(user));
 
 		return ViewHelper.COMPRA_PAGE;
 	}

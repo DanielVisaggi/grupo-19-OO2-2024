@@ -37,11 +37,12 @@ public class PedidoController {
 	public ModelAndView pedidoAprovisionamientoAlta(@PathVariable("idProducto") int idProducto) {
 		
 		ModelAndView mAV = new ModelAndView("admin/pedido/altaPedido");
-		
+
 		Producto producto = productoService.findById(idProducto);
 		Stock stock = stockService.findByProducto(producto);
 		
 		mAV.addObject("idStock", stock.getIdStock());
+
 		return mAV;
 	}
 	

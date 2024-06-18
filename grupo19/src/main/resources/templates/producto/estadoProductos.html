@@ -112,6 +112,8 @@
         <div>
             <a href="/comprarProducto">Comprar Productos</a>
             <span th:if="${isAdmin}">
+                <a class="nav-link text-white" href="/producto/alta"><i class="fas fa-cog mx-1"></i> Crear Producto</a>
+                <a class="nav-link text-white" href="/producto/list"><i class="fas fa-cog mx-1"></i> Listar Productos</a>
 				<a href="/adm/panel">Panel de Administrador</a>
 			</span>
             <form action="/logout" method="post">
