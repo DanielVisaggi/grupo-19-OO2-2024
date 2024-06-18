@@ -61,7 +61,7 @@
 		}
 
 		.footer {
-            position: fixed;
+            position: sticky;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -130,12 +130,14 @@
             <th>Nombre</th>
             <th>Código</th>
             <th>Stock restante</th>
+            <th>Mínimo stock definido</th>
             <th>Estado</th>
         </tr>
         <tr th:each="stock : ${stocks}">
             <td th:text="${stock.producto.nombre}"></td>
             <td th:text="${stock.producto.codigo}"></td>
             <td th:text="${stock.cantidadStock}"></td>
+            <td th:text="${stock.minimoStock}"></td>
             <td>
                 <div th:if="${stock.cantidadStock <= stock.minimoStock}">
                     <p>Preocupante. Este producto está por debajo de los niveles de stock definidos</p>

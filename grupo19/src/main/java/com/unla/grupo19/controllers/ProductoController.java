@@ -1,6 +1,7 @@
 package com.unla.grupo19.controllers;
 
 
+import com.unla.grupo19.dto.StockEstadoProductosDTO;
 import com.unla.grupo19.entities.Producto;
 
 import com.unla.grupo19.entities.Stock;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/producto")
@@ -43,8 +46,9 @@ public class ProductoController {
     public ModelAndView estadoPage(){
         ModelAndView mav = new ModelAndView(ViewHelper.ESTADO_PRODUCTOS_PAGE);
         User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<StockEstadoProductosDTO> stocks = stockService.stocksToStockEstadoProductosDTO(stockService.findAll());
         mav.addObject("isAdmin", userService.isAdmin(user));
-        mav.addObject("stocks", stockService.findAll());
+        mav.addObject("stocks", stocks);
         return mav;
     }
 

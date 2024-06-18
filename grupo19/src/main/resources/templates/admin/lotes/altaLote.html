@@ -9,7 +9,6 @@
         }
         th, td {
             border: 1px solid black;
-            padding: 8px;
             text-align: left;
         }
         th {
@@ -61,33 +60,25 @@
 			color: #d1c4e9;
 		}
 
-        p {
-			padding: 20px;
-			line-height: 1.6;
-		}
-
 		.footer {
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			background-color: #4a148c;
-			color: white;
-			text-align: center;
-			padding: 10px 0;
-		}
+            position: sticky;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #4a148c;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
 
         h1 {
             color: #6a1b9a;
             text-align: center;
-            padding: 20px 0;
         }
 
         p {
-            padding: 20px;
-            line-height: 1.6;
             text-align: justify;
-            margin-bottom: 30px;
             text-align: center;
         }
 
@@ -103,19 +94,12 @@
             text-decoration: underline;
         }
 
-        h3 {
-            margin-top: 20px;
-            text-align: justify;
-            text-align: center;
-        }
-
         .centered-link {
             text-align: center;
         }
 
         .centered-link a {
             display: inline-block;
-            margin: 10px 0;
         }
     </style>
     <title>Dar de alta un lote</title>
@@ -146,18 +130,20 @@
           <th>Nombre</th>
           <th>Código</th>
           <th>Stock restante</th>
+          <th>Mínimo stock definido</th>
           <th>Acciones</th>
       </tr>
       <tr th:each="stock : ${stocks}">
           <td th:text="${stock.producto.nombre}"></td>
           <td th:text="${stock.producto.codigo}"></td>
           <td th:text="${stock.cantidadStock}"></td>
+          <td th:text="${stock.minimoStock}"></td>
           <td>
               <form action="/adm/lote/alta/sent" method="POST">
                   <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-                  <label>Cantidad recibida: </label><input type="number" name="cantidadRecibida" />
-                  <label>Precio de compra: </label><input type="number" name="precioDeCompra" />
-                  <label>Proveedor: </label><input type="text" name="proveedor" />
+                  <label>Cantidad recibida: </label><input type="number" name="cantidadRecibida" /><br>
+                  <label>Precio de compra: </label><input type="number" name="precioDeCompra" /><br>
+                  <label>Proveedor: </label><input type="text" name="proveedor" /><br>
                   <button type="submit">Reabastecer</button>
                   <input type="hidden" name="idStock" th:value="${stock.idStock}" />
               </form>
