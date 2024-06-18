@@ -7,45 +7,45 @@
     <style>
         body {
 			font-family: 'Arial', sans-serif;
-			background-color: #f3f2f7; /* Fondo claro */
-			color: #333; /* Texto oscuro para contraste */
+			background-color: #f3f2f7;
+			color: #333;
 			margin: 0;
 			padding: 0;
 		}
 
 		.navbar {
-			background-color: #6a1b9a; /* Morado oscuro */
-			padding: 0.5rem 3rem; /* Espaciado interno */
+			background-color: #6a1b9a;
+			padding: 0.5rem 3rem;
 		}
 
 		.navbar a {
-			color: #fff; /* Texto blanco para contraste */
-			text-decoration: none; /* Sin subrayado en los enlaces */
-			padding: 0.5rem 1rem; /* Espaciado interno */
+			color: #fff;
+			text-decoration: none;
+			padding: 0.5rem 1rem;
 		}
 
 		.navbar a:hover {
-			color: #d1c4e9; /* Morado claro al pasar el mouse */
+			color: #d1c4e9;
 		}
 
 		.navbar div a, .navbar div form {
-			display: inline-block; /* Muestra los elementos uno al lado del otro */
-			margin-right: 10px; /* Espaciado entre elementos */
+			display: inline-block;
+			margin-right: 10px;
 		}
 
 		.navbar div form input[type="submit"] {
-			background: none; /* Sin fondo */
-			border: none; /* Sin borde */
-			color: #fff; /* Texto blanco para contraste */
-			padding: 0.5rem 1rem; /* Espaciado interno */
-			margin-right: 10px; /* Espaciado entre elementos */
-			cursor: pointer; /* Cursor como puntero para indicar clickeable */
-			font-family: inherit; /* Hereda la fuente del padre */
-			font-size: inherit; /* Hereda el tamaño de fuente del padre */
+			background: none;
+			border: none;
+			color: #fff;
+			padding: 0.5rem 1rem;
+			margin-right: 10px;
+			cursor: pointer;
+			font-family: inherit;
+			font-size: inherit;
 		}
 
 		.navbar div form input[type="submit"]:hover {
-			color: #d1c4e9; /* Morado claro al pasar el mouse */
+			color: #d1c4e9;
 		}
 
         p {
@@ -58,51 +58,51 @@
 			left: 0;
 			bottom: 0;
 			width: 100%;
-			background-color: #4a148c; /* Morado más oscuro para el footer */
+			background-color: #4a148c;
 			color: white;
 			text-align: center;
 			padding: 10px 0;
 		}
 
         h1 {
-            color: #6a1b9a; /* Color morado para el título */
-            text-align: center; /* Centrar el título */
-            padding: 20px 0; /* Espaciado vertical */
+            color: #6a1b9a;
+            text-align: center;
+            padding: 20px 0;
         }
 
         p {
             padding: 20px;
             line-height: 1.6;
-            text-align: justify; /* Justificar el texto */
-            margin-bottom: 30px; /* Espaciado debajo del párrafo */
+            text-align: justify;
+            margin-bottom: 30px;
             text-align: center;
         }
 
         a {
-            color: #6a1b9a; /* Color morado para los enlaces */
-            text-decoration: none; /* Sin subrayado en los enlaces */
-            font-weight: bold; /* Texto en negrita para los enlaces */
+            color: #6a1b9a;
+            text-decoration: none;
+            font-weight: bold;
             text-align: center;
         }
 
         a:hover {
-            color: #b39ddb; /* Morado claro al pasar el mouse */
-            text-decoration: underline; /* Subrayado al pasar el mouse */
+            color: #b39ddb;
+            text-decoration: underline;
         }
 
         h3 {
-            margin-top: 20px; /* Espaciado arriba de los subtítulos */
+            margin-top: 20px;
             text-align: justify;
             text-align: center;
         }
 
         .centered-link {
-            text-align: center; /* Centra el contenido del div */
+            text-align: center;
         }
 
         .centered-link a {
-            display: inline-block; /* Permite que el enlace sea centrado */
-            margin: 10px 0; /* Espaciado vertical para los enlaces */
+            display: inline-block;
+            margin: 10px 0;
         }
         .card-container {
             display: flex;
@@ -143,25 +143,14 @@
 	
 	<body>
 
-    <!-- Navbar -->
     <div class="navbar">
-        <!-- Container wrapper -->
         <div>
-            <!-- Navbar brand -->
             <a href="/home">PC Essentials | Home</a>
-
-            <!-- Icons -->
             <div>
-                <a href="#">Contact</a>
                 <a href="/comprarProducto">Comprar Productos</a>
-
-                <!-- Admin Panel Link -->
-                <!-- Asegúrate de reemplazar esto con tu lógica de visualización para administradores -->
                 <span th:if="${isAdmin}">
 				<a href="/adm/panel">Panel de Administrador</a>
 			</span>
-                <!-- Dropdown Menu -->
-                <a href="#">Perfil</a>
                 <form action="/logout" method="post">
                     <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
                     <input type="submit" value="Logout" />
