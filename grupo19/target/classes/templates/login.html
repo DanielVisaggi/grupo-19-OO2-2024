@@ -1,35 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>grupo_19</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesion</title>	
+
+	<!--BOOTSTRAP 4-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">    
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>    
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet"/>
     
-	</head>
-	<body>
-	    <!-- Page Content -->
-	    <div class="container">
-	      <div class="jumbotron">
-	        <h1 class="display-5">Login</h1>
-	        <form th:action="@{/loginprocess}" method="post">
-		      	<input type="text" name="username" id="username" placeholder="Username" />
-		      	<input type="password" name="password" id="password" placeholder="Password" />
-		      	<input type="submit"value="iniciar sesión" />
-	      	</form>
-	      	<div th:if="${error != null}" class="alert alert-danger">
-		    	Invalid username or password.
-		    </div>
-		     <div th:if="${logout != null}" class="alert alert-danger">
-		    	You have been logged out
-		    </div>
-	      </div>
-	      
-	    </div>
-	    <div>
-			no tienes una cuenta?<a th:href="@{/registro}">
-				 registrate!!
-			</a> 
-		</div>
-	</body>
+    <style>
+    *{
+    box-sizing: border-box;
+    }
+    body{
+        height: 100vh;
+        background-color: rgb(26, 21, 21);
+        font-family: 'Noto Sans';
+        color: #000;
+        font-size: 9px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    /*------------FORM-------------*/
+    .contenedor{
+        width: 100%;
+        padding: 1.5em;    
+    }
+    .form{
+        width: 70%;
+        height: 70%;
+        margin:auto;
+        border-radius: 25px;
+        box-shadow: 3px 0 30px rgba(29, 19, 19, .50);
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+    }
+
+    /*INFO*/
+    .form__sobre-nosotros{
+        padding: 0 1.5rem ;
+        padding-top: 1.5em;
+        color: #000;
+        text-align: left;
+    }
+    .form__sobre-nosotros h1{
+        font-size: 2em;
+        font-weight: normal;
+        margin-bottom: .5rem;
+    }
+    .form__info-extra{
+        margin-top: 1.5rem;
+        font-size: 1.25em;
+        display: none;
+    }
+    .form__info{
+        font-size: 1.25em ;
+        width: 100%;
+        color: #000;
+        margin-bottom: 0;
+        transition: .3s all ease;
+    }
+    .form__info a{
+        color: #000;
+        text-decoration: none;
+    }
+    .form__info a:hover{
+        color: #0075ff;
+    }
+
+    /*FORM DATOS*/
+    .form__datos{
+        padding: 1.5em;
+        flex-basis: 85%;
+    }
+    /*LABEL*/
+    .form__label{
+        display: block;
+        font-weight: 600;
+        font-size: 1em;
+        padding: 0.625em;
+    }
+
+    /*INPUT*/
+    .form__grupo-input{
+        position: relative;
+    }
+    .form__input{
+        width: 100%;
+        padding: 0 2.5em 0 0.625em;
+        border-radius: 3px;
+        height: 2.8125em;
+        line-height: 2.8125em;
+        border:3px solid #0075ff; 
+        transition: all .5s;
+    }
+    .form__input:focus{
+        box-shadow: 3px 0px 30px rgba(150,150,150,.4);
+        outline: none;
+    }
+    .form__icono{
+        font-size: 1.5em;
+        color: #000;
+        position: absolute;
+        bottom:0.375rem;
+        right: 0.4375rem;
+        z-index: 100;
+    }
+
+    /*BUTTON*/
+    .form__button{
+        margin-top: 1.25em;
+        height: 2.8125em;
+        line-height: 2.8125em;
+        width: 100%;
+        background-color: #000;
+        color:#fff;
+        font-weight: bold;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all .3s;
+    }
+    .form__button-icono{
+        margin-right: 0.625em;
+    } 
+    .form__button:hover{
+        box-shadow: 3px 0px 30px rgba(150,150,150,1);
+        background-color: #555555;
+    }
+
+    /*MSG ERROR*/
+    .error-msg{
+        font-size: 1.20em;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 80%;
+        height: 2.5rem;
+        margin: 0 auto; 
+        margin-top: 2rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #f66060;
+        color: #111;
+        box-shadow: 3px 0 20px rgba(200,200,200,.50);
+    }
+
+    /*------------FOOTER-------------*/
+    footer{
+        width: 100%;
+        margin-top: 1.875em;
+        color: #fff;
+    }
+    .derechos__info{
+        width: 100%;
+        text-align: center;
+        font-size: 1.25em;
+    }
+    .redes-sociales{
+        padding: 1.25em;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .redes-sociales__red{
+        font-size: 2.5em;
+        color: #888;
+        transition: all ease .5s;
+    }
+    .redes-sociales__red:hover{
+        color: #111;
+    }
+
+    /*MEDIA QUERY*/
+    @media (min-width: 575px) {
+        body{
+            font-size: 11px;
+        }
+    }
+    @media (min-width: 768px) {
+        body{
+            font-size: 15px;
+        }
+        main{
+            width: 80%;
+            max-width: 62.5em;
+            margin: 0 auto;
+        }
+        .form{
+            flex-direction: row;
+        }
+        .form__sobre-nosotros{
+            
+            padding: 1.25em;
+            flex-basis: 55%;
+            text-align: center;
+        }
+        .form__sobre-nosotros h1{
+            margin-top: 1.25em;
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+        .form__info-extra{
+            display: block;
+        }
+        .form__info{
+            margin-top: 50%;
+        }
+        .form__datos,
+        .form__sobre-nosotros{
+            flex-basis: 50%;
+        }
+    }
+    </style>
+
+</head>
+<body>
+    <main>
+        <div class="contenedor">
+            <form class="form" th:action="@{/loginprocess}" method="post" >
+                <div class="form__sobre-nosotros">
+                    <h1>Ingresa</h1>
+                    <p class="form__info-extra">¡Le damos la bienvenida!</p>
+                    <p class="form__info">No tiene una cuenta? <a  th:href="@{/registro}">Registrate aqui</a> </p>
+    
+                </div>
+                <div class="form__datos">
+                    <!--USER-->
+                    <div class="form__grupo">
+                        <label for="usuario" class="form__label">Usuario</label>
+                        <div class="form__grupo-input">
+                            <i class="form__icono  fas fa-user"></i>
+                            <input required type="text" name="username" class="form__input" id="nombreUsuario">
+                        </div>
+                    </div>
+                    
+                    <!--PASSWORD-->
+                    <div class="form__grupo">
+                        <label for="password" class="form__label">Contraseña</label>
+                        <div class="form__grupo-input">
+                            <i class="form__icono fas fa-key"></i>
+                            <input required type="password" name="password" class="form__input" id="password">
+                        </div>
+            
+                    </div>
+                      
+    
+                    <!--Button-->
+                    <div class="form__grupo form__grupo-button-enviar">
+                        <button class="form__button" type="submit"> <i class="form__button-icono fas fa-sign-in-alt"></i>INICIAR SESION</button>
+                    </div>
+                </div>
+            </form>
+            <div th:if="${error != null}" class="error-msg">
+                    Usuario o contraseña invalido.
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="derechos">
+            <p id="derechos-info" class="derechos__info">&copy;2024 PC Essentials. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
