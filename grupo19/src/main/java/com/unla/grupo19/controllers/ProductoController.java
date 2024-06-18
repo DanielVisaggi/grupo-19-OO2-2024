@@ -50,17 +50,13 @@ public class ProductoController {
         return "producto/getById.html";
     }
 
-    // Manejo la petición GET para la página de estado de productos
     @GetMapping("/estado")
     public ModelAndView estadoPage(){
-        // Creo un ModelAndView para la página de estado de productos
         ModelAndView mav = new ModelAndView(ViewHelper.ESTADO_PRODUCTOS_PAGE);
         User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
         List<StockEstadoProductosDTO> stocks = stockService.stocksToStockEstadoProductosDTO(stockService.findAll());
-        // Agrego la lista de stocks al ModelAndView
         mav.addObject("stocks", stocks);
         mav.addObject("isAdmin", userService.isAdmin(user));
-        // Retorno el ModelAndView
         return mav;
     }
 
