@@ -178,7 +178,6 @@
 					<form th:action="@{/comprar}" method="post">
 						<input type="hidden" name="idProducto" th:value="${producto.idProducto}" />
 						<div class="form-group">
-							<label for="cantidad">Cantidad</label>
 							<input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
 						</div>
 						<button type="submit" class="btn btn-primary">Comprar</button>
