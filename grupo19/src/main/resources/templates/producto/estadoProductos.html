@@ -141,7 +141,7 @@
             <td>
                 <div th:if="${stock.cantidadStock <= stock.minimoStock}">
                     <p>Preocupante. Este producto está por debajo de los niveles de stock definidos</p>
-                    <a href="/adm/lote/alta" style="display: block; text-align: center;">Empezar a reabastecer este producto</a>
+                    <a th:href="@{/adm/pedido/alta/{idProducto}(idProducto=${stock.producto.idProducto})}" style="display: block; text-align: center;">Empezar a reabastecer este producto</a>
                 </div>
                 <div th:if="${stock.cantidadStock > stock.minimoStock}">
                     <p>Adecuado. Nada de que preocuparse, pero vigilar el nivel de stock</p>

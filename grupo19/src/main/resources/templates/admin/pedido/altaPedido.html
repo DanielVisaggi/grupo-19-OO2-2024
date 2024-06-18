@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido de aprovisionamiento</title>
+</head>
+<body>
+    <h1>Pedido de aprovisionamiento para el stock de ID <span th:text="${idStock}"></span></h1>
+	
+	
+    <form action="/adm/pedido/alta/solicitada" method="POST">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+        <label>Cantidad a solicitar: </label><input type="number" name="cantidad" /><br>
+        <label>Proveedor: </label><input type="text" name="proveedor" /><br>
+        <button type="submit">Solicitar aprovisionamiento</button>
+        <input type="hidden" name="idStock" th:value="${idStock}" />
+    </form>
+		
+		
+</body>
+</html>

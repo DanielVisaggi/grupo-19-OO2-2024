@@ -31,6 +31,10 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_stock")
     private Stock stock;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     public Pedido(int cantidad, LocalDate fecha, String proveedor){
         this.cantidad = cantidad;

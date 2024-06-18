@@ -27,5 +27,16 @@ public class Stock {
 
     @Column(name = "minimo_stock", nullable = false)
     private int minimoStock;
+    
+    public Stock(Producto producto, int cantidadStock, int minimoStock){
+        this.producto = producto;
+        this.cantidadStock = cantidadStock;
+        this.minimoStock = minimoStock;
+    }
+
+    public Stock(int cantidadStock, int minimoStock){
+        this.cantidadStock = cantidadStock;
+        this.minimoStock = minimoStock;
+    }
 
 }
