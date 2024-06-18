@@ -5,9 +5,9 @@ import com.unla.grupo19.entities.Stock;
 import com.unla.grupo19.entities.User;
 import com.unla.grupo19.entities.Producto;
 import com.unla.grupo19.services.implementation.PedidoService;
+import com.unla.grupo19.services.implementation.ProductoService;
 import com.unla.grupo19.services.implementation.StockService;
 import com.unla.grupo19.services.implementation.UserService;
-import com.unla.grupo19.services.implementation.ProductoService;
 
 import java.time.LocalDate;
 
