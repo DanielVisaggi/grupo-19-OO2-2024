@@ -1,27 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    
-     <title>Document</title>
+
+	<meta charset="UTF-8">
+
+	<title>Registrar Usuario</title>
+
+	<!--BOOTSTRAP 4-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+	<link rel="stylesheet" th:href="@{/css/all.min.css}">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@300;400&display=swap"
+		rel="stylesheet" />
+
+	<style>
+		body {
+
+			background-color: rgb(0, 0, 0);
+			font-family: 'Noto Sans';
+			color: rgb(255, 255, 255);
+			font-size: 25px;
+			height: 100vh;
+
+
+		}
+
+		.contenedor {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		/*------------FORMULARIO-------------*/
+		main {
+
+			width: 50%;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			align-items: center;
+			height: 100%;
+
+
+
+		}
+
+		main h1 {
+			font-size: 2em;
+		}
+
+		/*LABEL*/
+
+		.form__label {
+
+			font-weight: 700;
+
+		}
+
+		.form__input {
+			width: 100%;
+			padding: 0 4.5em 0 0.625em;
+			border-radius: 5px;
+			height: 2.8125em;
+
+
+
+		}
+
+		.form__input:focus {
+			border: 3.5px solid rgb(255, 0, 0);
+			box-shadow: 3px 0px 30px rgb(255, 0, 0);
+			outline: none;
+
+		}
+
+
+
+		.form__button {
+			height: 2.8125em;
+			line-height: 1.8125em;
+			width: 100%;
+			background-color: rgb(255, 0, 0);
+			color: #fff;
+			font-weight: bold;
+			border: none;
+			border-radius: 3px;
+			cursor: pointer;
+			transition: ease .3s;
+
+		}
+
+		.form__button:hover {
+			box-shadow: 3px 0px 30px rgb(255, 0, 0);
+
+		}
+
+	.form__grupo-button-cancelar{ 
+		width: 20%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		}
+		.form__grupo-button-cancelar a{
+			width: 100%;
+			text-align: center;
+			line-height: 280%
+		}
+		.form__grupo-button-cancelar a:hover{
+			box-shadow: 3px 0px 30px rgb(255, 0, 0);
+			text-decoration: none;
+			color: white;
+		}
+
+		/*------------FOOTER-------------*/
+		footer {
+			width: 100%;
+
+		}
+
+		.derechos__info {
+			width: 100%;
+			text-align: center;
+			font-size: 1.25em;
+
+		}
+/*MSG ERROR*/
+    .error-msg{
+        font-size: 1.20em;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 80%;
+        height: 2.5rem;
+        margin: 0 auto; 
+        margin-top: 2rem;
+        border: none;
+        border-radius: 5px;
+        background-color: #f66060;
+        color: #111;
+        box-shadow: 3px 0 20px rgba(200,200,200,.50);
+    }
+
+
+		/*MEDIA QUERY*/
+
+
+
+		@media (min-width: 168px) {
+			body {
+				font-size: 15px;
+			}
+
+			.form {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.9375em;
+
+
+			}
+
+			.form__grupo.form__grupo-button-enviar {
+				grid-column: span 2;
+				justify-self: center;
+				width: 50%;
+				margin-top: 1em;
+			}
+		}
+	</style>
+
+
+
 </head>
+
+
 <body>
-	<div class="container">
-<form  th:action="@{/save}" th:object="${usuario}"method="post"> 
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Usuario</label>
-    <input type="text" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" th:field="${usuario.username}">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" th:field="${usuario.password}">
-  </div>
-  <button type="submit" class="btn btn-primary">Registrar</button>
-</form>
-</div>
+
+	<div class="contenedor">
+		<!--FORMULARIO-->
+		<main>
+			<h1 class="titulo">Complete con sus Datos </h1>
+
+			<form th:action="@{/save}" th:object="${usuario}" method="POST" class="form" id="form">
+
+				<div class="form__grupo" id="grupo__apellido">
+					<label for="apellido" class="form__label">Usuario</label>
+					<div class="form__grupo-input">
+						<input th:field="${usuario.username}" type="text" name="username" class="form__input"
+							id="username">
+					</div>
+				</div>
+
+
+
+				<!--PASSWORD-->
+				<div class="form__grupo" id="grupo__password">
+					<label for="password" class="form__label">Contraseña</label>
+					<div class="form__grupo-input">
+						<input th:field="${usuario.password}" type="password" name="password" class="form__input"
+							id="password">
+
+					</div>
+				</div>
+
+				<!--BUTTON-->
+				<div class="form__grupo form__grupo-button-enviar">
+					<button th:if="${editMode == null}" class="form__button" type="submit">REGISTRAR</button>
+				</div>
+
+			</form>
+			<!--BUTTON-->
+				<div class="form__grupo form__grupo-button-cancelar">
+					<a th:href="@{/cancel}" class="form__button" type="submit">CANCELAR</a>
+				</div>
+				
+			 <div th:if="${error != null}" class="error-msg">
+				 Por favor complete con sus datos
+            </div>
+		</main>
+
+		<!--FOOTER-->
+		<footer>
+			<div class="derechos">
+				<p id="derechos-info" class="derechos__info">&copy;2024 PC Essentials. Todos los derechos reservados.
+				</p>
+			</div>
+		</footer>
+	</div>
+
+
+
+
+
 </body>
+
 </html>
