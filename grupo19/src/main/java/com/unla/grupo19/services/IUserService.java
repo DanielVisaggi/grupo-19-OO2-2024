@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.unla.grupo19.entities.User;
 
 
-public interface IUserService  {
+public interface IUserService   {
 	
-	public User saveOrUpdate(User user);
+	public User saveOrUpdate(User user) throws Exception;
 	
 	public User findByUsernameQuery(String username);
 

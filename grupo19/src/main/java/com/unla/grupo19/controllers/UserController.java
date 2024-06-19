@@ -1,6 +1,7 @@
 package com.unla.grupo19.controllers;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import com.unla.grupo19.entities.UserRole;
 import com.unla.grupo19.helpers.ViewHelper;
@@ -40,11 +41,17 @@ public class UserController {
 	}
 	
 	@PostMapping("/save")
-	public RedirectView guardar(@ModelAttribute("usuario")User user) {
+	public String guardar(@ModelAttribute("usuario")User user,Model model)  {
 		System.out.println(user); 
 		user.setRoles(Arrays.asList(roleService.traerPorNombre(Roles.ROLE_AUDITOR).get())); //se le setea el rol de audirot por defecto
+		try {
+			
 		userService.saveOrUpdate(user);
-		return new RedirectView("/"+ViewHelper.LOGIN_PAGE);
+		}catch (Exception e) {
+			model.addAttribute("error",e.getMessage());
+			return ViewHelper.REGISTER_PAGE;
+		}
+		return "redirect:/login";
 	}
 	
 	
@@ -67,6 +74,12 @@ public class UserController {
 		User user = userService.findByUsernameQuery(SecurityContextHolder.getContext().getAuthentication().getName());
 		mav.addObject("isAdmin", userService.isAdmin(user));
 		return mav;
+	}
+	
+	@GetMapping("/cancel")
+	public String volver() {
+		return "redirect:/login";
+		
 	}
 
 }

@@ -52,7 +52,7 @@ public class SecurityConfiguration {
 
 		http.authorizeHttpRequests((requests) -> requests
 						// Permitir acceso a las rutas de edición y recursos estáticos
-						.requestMatchers("/", "/registro", "/save", "/producto/alta", "/producto/alta/sent").permitAll() // Ajustar las rutas permitidas
+						.requestMatchers("/", "/registro", "/save","/cancel", "/producto/alta", "/producto/alta/sent").permitAll() // Ajustar las rutas permitidas
 						//.requestMatchers("/","/registro","/save").permitAll()
 						.anyRequest().authenticated())
 				.formLogin((form) -> form.loginPage("/login").loginProcessingUrl("/loginprocess")
