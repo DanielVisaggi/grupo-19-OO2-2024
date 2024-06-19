@@ -11,6 +11,7 @@ public interface IStockService {
     public Stock findByIdStock(int idStock);
     public Stock findByProducto(Producto producto);
     public List<Stock> findAll();
+    public List<Stock> findStocksWithVisibleProducts();
     public List<StockEstadoProductosDTO> stocksToStockEstadoProductosDTO(List<Stock> stocks);
     public boolean removeStock(int idStock);
     public boolean removeStock(Stock stock);

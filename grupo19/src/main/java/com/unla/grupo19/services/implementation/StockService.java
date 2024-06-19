@@ -38,6 +38,11 @@ public class StockService implements IStockService {
     }
 
     @Override
+    public List<Stock> findStocksWithVisibleProducts() {
+        return stockRepository.findStocksWithVisibleProducts();
+    }
+
+    @Override
     public List<StockEstadoProductosDTO> stocksToStockEstadoProductosDTO(List<Stock> stocks) {
         List<StockEstadoProductosDTO> newStocks = new ArrayList<>();
         for(Stock stock : stocks)
