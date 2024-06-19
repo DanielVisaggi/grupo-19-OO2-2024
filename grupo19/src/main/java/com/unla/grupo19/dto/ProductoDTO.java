@@ -15,11 +15,14 @@ public class ProductoDTO {
 	
 	private int precioDeVenta;
 	
-	public ProductoDTO(int idProducto, String nombre, String descripcion, int precioDeVenta) {
+	private boolean visible;
+	
+	public ProductoDTO(int idProducto, String nombre, String descripcion, int precioDeVenta, boolean visible) {
 		this.setIdProducto(idProducto);
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precioDeVenta = precioDeVenta;
+		this.visible = visible;
 	}
 	
 }
