@@ -127,7 +127,7 @@
             <td th:text="${producto.precioDeVenta}"></td>
             <td>
                 <button class="btn btn-warning" th:attr="onclick='editarProducto(' + ${producto.idProducto} + ')'" data-bs-toggle="modal" data-bs-target="#editarProductoModal">Editar</button>
-                <a th:href="@{'/producto/borrar/' + ${producto.idProducto}}" class="btn btn-danger">Ocultar</a>
+                <a th:href="@{'/producto/borrar/' + ${producto.idProducto}}" class="btn btn-danger">Eliminar</a>
             </td>
         </tr>
         </tbody>
