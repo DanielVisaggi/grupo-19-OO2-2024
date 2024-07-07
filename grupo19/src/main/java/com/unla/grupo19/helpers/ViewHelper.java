@@ -7,4 +7,5 @@ public abstract class ViewHelper {
     public static final String COMPRA_PAGE = "comprarProducto.html";
     public static final String ADMIN_PAGE = "admin/adminPanel";
     public static final String ESTADO_PRODUCTOS_PAGE = "producto/estadoProductos";
+    public static final String IFORME_COMPRA = "admin/informe/informeCompra";
 }

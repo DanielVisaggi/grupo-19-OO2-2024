@@ -1,7 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <meta charset="UTF-8">
     <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
         body {
 			font-family: 'Arial', sans-serif;
 			background-color: #f3f2f7;
@@ -45,33 +60,25 @@
 			color: #d1c4e9;
 		}
 
-        p {
-			padding: 20px;
-			line-height: 1.6;
-		}
-
 		.footer {
-			position: fixed;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			background-color: #4a148c;
-			color: white;
-			text-align: center;
-			padding: 10px 0;
-		}
+            position: sticky;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #4a148c;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
 
         h1 {
             color: #6a1b9a;
             text-align: center;
-            padding: 20px 0;
         }
 
         p {
-            padding: 20px;
-            line-height: 1.6;
             text-align: justify;
-            margin-bottom: 30px;
             text-align: center;
         }
 
@@ -87,29 +94,21 @@
             text-decoration: underline;
         }
 
-        h3 {
-            margin-top: 20px;
-            text-align: justify;
-            text-align: center;
-        }
-
         .centered-link {
             text-align: center;
         }
 
         .centered-link a {
             display: inline-block;
-            margin: 10px 0;
         }
-
     </style>
-    <meta charset="UTF-8">
-    <title>Admin Panel</title>
+    <title>Estado de los productos</title>
 </head>
 <body>
 <div class="navbar">
     <div>
         <a href="/home">PC Essentials | Home</a>
+
         <div>
             <a href="/comprarProducto">Comprar Productos</a>
             <span th:if="${isAdmin}">
@@ -124,22 +123,28 @@
         </div>
     </div>
 </div>
-    <h1>Bienvenido, Administrador</h1>
-    <p>En esta página podrá encontrar todas las funcionalidades referidas a los datos de la organización</p>
-    <h3>Funcionalidades sobre los lotes</h3>
-    <div class="centered-link">
-        <a href="/adm/lote/alta">Dar de alta lotes</a>
-    </div>
-
-    <h3>Funcionalidades sobre los productos</h3>
-    <div class="centered-link">
-        <a href="/producto/estado">Informe para toma de decisiones</a>
-    </div>
-    
-    <div class="centered-link">
-        <a href="/informe">Informe para visualizar las compras </a>
-    </div>
-
-
+    <h1>Informe sobre las compras por producto de todos los clientes</h1>
+    <br>
+   
+    <table>
+        <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Fecha Compra</th>
+            <th>Cantidad</th>
+            <th>Precio total</th>
+        </tr>
+        <tr th:each="informe : ${informes}">
+            <td th:text="${informe.cliente.username}"></td>
+            <td th:text="${informe.producto.nombre}"></td>
+            <td th:text="${informe.fechaCompra}"></td>
+            <td th:text="${informe.cantidad}"></td>
+             <td th:text="${informe.precioTotal}"></td>
+            
+        </tr>
+    </table>
+<div class="footer">
+    <p>&copy; 2024 PC Essentials. Todos los derechos reservados.</p>
+</div>
 </body>
 </html>
