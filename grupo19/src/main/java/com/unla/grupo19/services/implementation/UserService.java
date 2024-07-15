@@ -24,8 +24,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public User saveOrUpdate(User user)throws Exception {
-		if(Optional.ofNullable(user).isEmpty()) {
-			throw new Exception();
+		if(this.findByUsernameQuery(user.getUsername())!=null) {
+			throw new Exception("El usuario "+ user.getUsername()+ " ya se encuetra registrado ");
 		}
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);

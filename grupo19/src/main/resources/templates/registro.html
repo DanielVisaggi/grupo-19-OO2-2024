@@ -221,9 +221,8 @@
 					<a th:href="@{/cancel}" class="form__button" type="submit">CANCELAR</a>
 				</div>
 				
-			 <div th:if="${error != null}" class="error-msg">
-				 Por favor complete con sus datos
-            </div>
+			 <h1 th:if="${error != null}"th:text="${error}" class="error-msg">
+			 </h1>
 		</main>
 
 		<!--FOOTER-->
