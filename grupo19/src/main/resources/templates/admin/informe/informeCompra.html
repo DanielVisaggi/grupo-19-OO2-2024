@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid black;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        body {
+	<meta charset="UTF-8">
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			border: 1px solid black;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f2f2f2;
+		}
+
+		body {
 			font-family: 'Arial', sans-serif;
 			background-color: #f3f2f7;
 			color: #333;
@@ -40,7 +46,8 @@
 			color: #d1c4e9;
 		}
 
-		.navbar div a, .navbar div form {
+		.navbar div a,
+		.navbar div form {
 			display: inline-block;
 			margin-right: 10px;
 		}
@@ -61,90 +68,115 @@
 		}
 
 		.footer {
-            position: sticky;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #4a148c;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
+			position: sticky;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			background-color: #4a148c;
+			color: white;
+			text-align: center;
+			padding: 10px 0;
+		}
 
 
-        h1 {
-            color: #6a1b9a;
-            text-align: center;
-        }
+		h1 {
+			color: #6a1b9a;
+			text-align: center;
+		}
 
-        p {
-            text-align: justify;
-            text-align: center;
-        }
+		p {
+			text-align: justify;
+			text-align: center;
+		}
 
-        a {
-            color: #6a1b9a;
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-        }
+		a {
+			color: #6a1b9a;
+			text-decoration: none;
+			font-weight: bold;
+			text-align: center;
+		}
 
-        a:hover {
-            color: #b39ddb;
-            text-decoration: underline;
-        }
+		a:hover {
+			color: #b39ddb;
+			text-decoration: underline;
+		}
 
-        .centered-link {
-            text-align: center;
-        }
+		.centered-link {
+			text-align: center;
+		}
 
-        .centered-link a {
-            display: inline-block;
-        }
-    </style>
-    <title>Estado de los productos</title>
+		.centered-link a {
+			display: inline-block;
+		}
+
+		.tabla-header__button {
+			margin-right: 1.875em;
+			border: 0;
+			cursor: pointer;
+			text-decoration: none;
+			color: rgb(0, 0, 0);
+			transition: .5s all ease;
+		}
+
+		.tabla-header__button:hover,
+		.tabla i:hover {
+			color: rgb(128, 0, 255);
+		}
+	</style>
+	<title>Estado de los productos</title>
 </head>
-<body>
-<div class="navbar">
-    <div>
-        <a href="/home">PC Essentials | Home</a>
 
-        <div>
-            <a href="/comprarProducto">Comprar Productos</a>
-            <span th:if="${isAdmin}">
-                <a class="nav-link text-white" href="/producto/alta"><i class="fas fa-cog mx-1"></i> Crear Producto</a>
-                <a class="nav-link text-white" href="/producto/list"><i class="fas fa-cog mx-1"></i> Listar Productos</a>
-				<a href="/adm/panel">Panel de Administrador</a>
-			</span>
-            <form action="/logout" method="post">
-                <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
-                <input type="submit" value="Logout" />
-            </form>
-        </div>
-    </div>
-</div>
-    <h1>Informe sobre las compras por producto de todos los clientes</h1>
-    <br>
-   
-    <table>
-        <tr>
-            <th>Cliente</th>
-            <th>Producto</th>
-            <th>Fecha Compra</th>
-            <th>Cantidad</th>
-            <th>Precio total</th>
-        </tr>
-        <tr th:each="informe : ${informes}">
-            <td th:text="${informe.cliente.username}"></td>
-            <td th:text="${informe.producto.nombre}"></td>
-            <td th:text="${informe.fechaCompra}"></td>
-            <td th:text="${informe.cantidad}"></td>
-             <td th:text="${informe.precioTotal}"></td>
-            
-        </tr>
-    </table>
-<div class="footer">
-    <p>&copy; 2024 PC Essentials. Todos los derechos reservados.</p>
-</div>
+<body>
+	<div class="navbar">
+		<div>
+			<a href="/home">PC Essentials | Home</a>
+
+			<div>
+				<a href="/comprarProducto">Comprar Productos</a>
+				<span th:if="${isAdmin}">
+					<a class="nav-link text-white" href="/producto/alta"><i class="fas fa-cog mx-1"></i> Crear
+						Producto</a>
+					<a class="nav-link text-white" href="/producto/list"><i class="fas fa-cog mx-1"></i> Listar
+						Productos</a>
+					<a href="/adm/panel">Panel de Administrador</a>
+				</span>
+				<form action="/logout" method="post">
+					<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+					<input type="submit" value="Logout" />
+				</form>
+			</div>
+		</div>
+	</div>
+	<h1>Informe sobre las compras por producto de todos los clientes</h1>
+	<br>
+	<a th:onclick="crearPDF()" class="tabla-header__button" id="button-pdf">
+		<i class="fas fa-file-pdf"></i>Generar PDF
+	</a>
+
+	<table>
+		<tr>
+			<th>Cliente</th>
+			<th>Producto</th>
+			<th>Fecha Compra</th>
+			<th>Cantidad</th>
+			<th>Precio total</th>
+		</tr>
+		<tr th:each="informe : ${informes}">
+			<td th:text="${informe.cliente.username}"></td>
+			<td th:text="${informe.producto.nombre}"></td>
+			<td th:text="${informe.fechaCompra}"></td>
+			<td th:text="${informe.cantidad}"></td>
+			<td th:text="${informe.precioTotal}"></td>
+
+		</tr>
+	</table>
+	<div class="footer">
+		<p>&copy; 2024 PC Essentials. Todos los derechos reservados.</p>
+	</div>
+	<!--SCRIPT-->
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script th:src="@{/js/descargaInforme.js}"></script>
 </body>
+
 </html>

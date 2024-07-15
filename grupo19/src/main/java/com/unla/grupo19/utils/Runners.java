@@ -59,10 +59,12 @@ public class Runners  implements CommandLineRunner{
         // TODO Auto-generated method stub
         if(this.rolRepository.count() == 0) {
             this.rolRepository.saveAll(
-                    Arrays.asList(new UserRole(Roles.ROLE_ADMIN, LocalDateTime.now(), LocalDateTime.now()), new UserRole(Roles.ROLE_AUDITOR, LocalDateTime.now(), LocalDateTime.now())));
+                    Arrays.asList(new UserRole(Roles.ROLE_ADMIN, LocalDateTime.now(), LocalDateTime.now()), 
+                    		new UserRole(Roles.ROLE_AUDITOR, LocalDateTime.now(), LocalDateTime.now())));
         }
         if(this.userRepository.count()==0) {
-            this.userRepository.saveAll(Arrays.asList(new com.unla.grupo19.entities.User("admin", new BCryptPasswordEncoder().encode("1111"), true, LocalDateTime.now(), LocalDateTime.now(),this.rolRepository.findAll())));
+            this.userRepository.saveAll(Arrays.asList(new com.unla.grupo19.entities.User("admin", new BCryptPasswordEncoder()
+            		.encode("1111"), true, LocalDateTime.now(), LocalDateTime.now(),this.rolRepository.findAll())));
         }
     }
 
