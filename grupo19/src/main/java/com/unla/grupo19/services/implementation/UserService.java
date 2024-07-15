@@ -27,6 +27,7 @@ public class UserService implements IUserService {
 		if(Optional.ofNullable(user).isEmpty()) {
 			throw new Exception();
 		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 
